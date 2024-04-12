@@ -1,3 +1,42 @@
+<?php
+
+$message_erreur = "";
+
+if(isset($_POST['submit'])){
+    require_once 'inclusion/config.php';
+
+    $email = $_POST['mail'];
+    $mot_de_passe = $_POST['pass'];
+
+    $sql = "SELECT id, email, password FROM utilisateurs WHERE email = :email";
+
+    $stmt = $bdd->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+
+    // Récupérer le résultat de la requête
+    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if($utilisateur){
+
+        if(password_verify($mot_de_passe, $utilisateur['password'])){
+            // Démarrer la session
+            session_start();
+
+            // Stocker l'ID de l'utilisateur dans la session
+            $_SESSION['user_id'] = $utilisateur['id'];
+
+            header('Location: index.php');
+            exit;
+        } else {
+            $message_erreur = "Mot de passe incorrect.";
+        }
+    } else {
+        $message_erreur = "Aucun utilisateur trouvé avec cet e-mail.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +50,10 @@
     <div id="container">
         <form action="connexion.php" method="post">
             <h1>Connexion à To-Do List</h1>
+            <!-- Afficher le message d'erreur -->
+            <?php if(!empty($message_erreur)) { ?>
+                <div class="erreur"><?php echo $message_erreur; ?></div>
+            <?php } ?>
 
             <div class="champs">
                 <label for="mail">Email : </label><br>
