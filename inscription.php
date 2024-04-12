@@ -1,3 +1,53 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Vérifier si le formulaire a été soumis
+if(isset($_POST['submit'])){
+    // Inclure le fichier de configuration de la base de données
+    require_once 'inclusion/config.php';
+
+    // Récupérer les données du formulaire
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $tel = $_POST['tel'];
+    $email = $_POST['mail'];
+    $mot_de_passe = $_POST['pass'];
+
+    // Hasher le mot de passe avant de le stocker dans la base de données
+    $password_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+
+    // Préparer la requête d'insertion
+    $sql = "INSERT INTO utilisateurs (nom, prenom, email, password, telephone) VALUES (:nom, :prenom, :email, :password, :telephone)";
+
+    // Préparer la requête
+    $stmt = $bdd->prepare($sql);
+
+    // Liaison des paramètres
+    $stmt->bindParam(':nom', $nom);
+    $stmt->bindParam(':prenom', $prenom);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password_hash);
+    $stmt->bindParam(':telephone', $tel);
+
+    // Exécuter la requête
+    if($stmt->execute()){
+        // Rediriger vers la page de connexion si l'inscription est réussie
+        header('Location: connexion.php');
+        exit;
+    } else {
+        // Afficher un message d'erreur si l'inscription échoue
+        echo "Erreur lors de l'inscription.";
+    }
+}
+?>
+
+
+<!-- Votre formulaire d'inscription HTML ici -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
