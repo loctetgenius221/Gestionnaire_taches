@@ -10,7 +10,7 @@
 
     <div id="container">
         <form action="connexion.php" method="post">
-            <h1>Inscription To-Do List</h1>
+            <h1>Connexion à To-Do List</h1>
 
             <div class="champs">
                 <label for="mail">Email : </label><br>
