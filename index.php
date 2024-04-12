@@ -1,3 +1,17 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once 'inclusion/config.php';
+require_once 'taches.php'; //
+
+// Récupérer les tâches depuis la base de données
+$tachesAFaire = $tache->lireTachesParEtat('À faire');
+$tachesEnCours = $tache->lireTachesParEtat('En cours');
+$tachesTerminee = $tache->lireTachesParEtat('Terminée');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,32 +32,63 @@
             <li>Prénom</li>
             <li>Téléphone</li>
             <li>Mail</li>
-
         </ul>
         <div class="logout-btn">
-            <a href="#"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
+            <a href="deconnexion.php"><i class="fa-solid fa-right-from-bracket"></i>Déconnexion</a>
         </div>
     </nav>
     <div class="main-content">
         <div class="column">
             <h2>À faire</h2>
             <div class="task-list">
-                <?php //afficherTaches($tachesAFaire); ?>
+                <?php 
+                // Afficher les tâches à faire
+                foreach($tachesAFaire as $tache) {
+                    echo "<div class='task'>";
+                    echo "<span class='label'>" . $tache['libelle'] . "</span>";
+                    echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
+                    echo "<span>Priorité: " . $tache['priorite'] . "</span>";
+                    echo "<div class='difficulty-bar " . getDifficultyClass($tache['difficulte']) . "'></div>";
+                    echo "<button class='view-btn'>Vue</button>";
+                    echo "</div>";
+                }
+                ?>
             </div>
         </div>
         <div class="column">
             <h2>En cours</h2>
             <div class="task-list">
-                <?php //afficherTaches($tachesEnCours); ?>
+                <?php 
+                // Afficher les tâches en cours
+                foreach($tachesEnCours as $tache) {
+                    echo "<div class='task'>";
+                    echo "<span class='label'>" . $tache['libelle'] . "</span>";
+                    echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
+                    echo "<span>Priorité: " . $tache['priorite'] . "</span>";
+                    echo "<div class='difficulty-bar " . getDifficultyClass($tache['difficulte']) . "'></div>";
+                    echo "<button class='view-btn'>Vue</button>";
+                    echo "</div>";
+                }
+                ?>
             </div>
         </div>
         <div class="column">
             <h2>Terminée</h2>
             <div class="task-list">
-                <?php //afficherTaches($tachesTerminee); ?>
+                <?php 
+                // Afficher les tâches terminées
+                foreach($tachesTerminee as $tache) {
+                    echo "<div class='task'>";
+                    echo "<span class='label'>" . $tache['libelle'] . "</span>";
+                    echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
+                    echo "<span>Priorité: " . $tache['priorite'] . "</span>";
+                    echo "<div class='difficulty-bar " . getDifficultyClass($tache['difficulte']) . "'></div>";
+                    echo "<button class='view-btn'>Vue</button>";
+                    echo "</div>";
+                }
+                ?>
             </div>
         </div>
     </div>
-
 </body>
 </html>
