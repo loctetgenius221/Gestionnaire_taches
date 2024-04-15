@@ -88,7 +88,7 @@ require_once 'inclusion/tacheInterface.php';
 
             try {
 
-                $stmt = $this->bdd->prepare("INSERT INTO client (utilisateur_id, libelle, description, date_echeance, priorite, difficulte, :etat) VALUES (:utilisateur_id, :libelle, :description, :date_echeance, :priorite, :difficulte, :etat)");
+                $stmt = $this->bdd->prepare("INSERT INTO client (utilisateur_id, libelle, description, date_echeance, priorite, difficulte, etat) VALUES (:utilisateur_id, :libelle, :description, :date_echeance, :priorite, :difficulte, :etat)");
 
                 $stmt->bindParam(':utilisateur_id', $utilisateur_id);
                 $stmt->bindParam(':libelle', $libelle);
@@ -101,7 +101,7 @@ require_once 'inclusion/tacheInterface.php';
 
                 $stmt->execute();
 
-                header('location: view_client.php');
+                header('location: index.php');
                 exit;
 
             } catch(PDOException $e) {
@@ -125,10 +125,11 @@ require_once 'inclusion/tacheInterface.php';
             }
         }
 
-        public function lireTachesParEtat($etat) {
+        public function lireTachesParEtat($etat, $utilisateur_id) {
             try {
-                $stmt = $this->bdd->prepare("SELECT * FROM taches WHERE etat = :etat");
+                $stmt = $this->bdd->prepare("SELECT * FROM taches WHERE etat = :etat AND utilisateur_id = :utilisateur_id");
                 $stmt->bindParam(':etat', $etat);
+                $stmt->bindParam(':utilisateur_id', $utilisateur_id);
                 $stmt->execute();
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch(PDOException $e) {
@@ -152,7 +153,7 @@ require_once 'inclusion/tacheInterface.php';
         
                 $stmt->execute();
         
-                header('location: view_client.php');
+                header('location: index.php');
                 exit;
             } catch(PDOException $e) {
                 die("Impossible de modifier les données du client : ".$e->getMessage());
@@ -169,13 +170,16 @@ require_once 'inclusion/tacheInterface.php';
                 $sth->bindParam(':id', $id, PDO::PARAM_INT);
                 $sth->execute();
     
-                header('location: view_client.php');
+                header('location: index.php');
                 exit;
     
             } catch(PDOException $e) {
                 die("Impossible de supprimer le client : ".$e->getMessage());
             }
         }
+
+        
+        
     
     
     
