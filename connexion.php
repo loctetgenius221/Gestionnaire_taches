@@ -1,40 +1,48 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$message_erreur = "";
-
-if(isset($_POST['submit'])){
     require_once 'inclusion/config.php';
+    session_start();
 
-    $email = $_POST['mail'];
-    $mot_de_passe = $_POST['pass'];
 
-    $sql = "SELECT id, email, password FROM utilisateurs WHERE email = :email";
+    $message_erreur = "";
 
-    $stmt = $bdd->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+    if(isset($_POST['submit'])){
 
-    // Récupérer le résultat de la requête
-    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+        $email = $_POST['mail'];
+        $mot_de_passe = $_POST['pass'];
 
-    if($utilisateur){
 
-        if(password_verify($mot_de_passe, $utilisateur['password'])){
-            // Démarrer la session
-            session_start();
+        $sql = "SELECT * FROM utilisateurs WHERE email = :email";
 
-            // Stocker l'ID de l'utilisateur dans la session
-            $_SESSION['user_id'] = $utilisateur['id'];
+        $stmt = $bdd->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-            header('Location: index.php');
-            exit;
+        // Récupérer le résultat de la requête
+        $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($utilisateur){
+
+            if(password_verify($mot_de_passe, $utilisateur['password'])){
+
+                $_SESSION['user_id'] = $utilisateur['id'];
+                $_SESSION['nom'] = $utilisateur['nom']; 
+                $_SESSION['prenom'] = $utilisateur['prenom']; 
+                $_SESSION['email'] = $utilisateur['email']; 
+                $_SESSION['telephone'] = $utilisateur['telephone']; 
+
+                header('Location: index.php');
+                exit;
+            } else {
+                $message_erreur = "Mot de passe incorrect.";
+            }
         } else {
-            $message_erreur = "Mot de passe incorrect.";
+            $message_erreur = "Aucun utilisateur trouvé avec cet e-mail.";
         }
-    } else {
-        $message_erreur = "Aucun utilisateur trouvé avec cet e-mail.";
     }
-}
 ?>
 
 <!DOCTYPE html>
