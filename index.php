@@ -103,7 +103,6 @@ if(isset($_SESSION['user_id'])) {
                 <?php 
                 // Afficher les tâches en cours
                 foreach($tachesEnCours as $tache) {
-                    $difficultyClass = $tache->getDifficultyClass($tache['difficulte']);
                     echo "<div class='task'>";
                     echo "<span class='label'>" . $tache['libelle'] . "</span>";
                     echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
@@ -121,7 +120,6 @@ if(isset($_SESSION['user_id'])) {
                 <?php 
                 // Afficher les tâches terminées
                 foreach($tachesTerminee as $tache) {
-                    $difficultyClass = $tache->getDifficultyClass($tache['difficulte']);
                     echo "<div class='task'>";
                     echo "<span class='label'>" . $tache['libelle'] . "</span>";
                     echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";

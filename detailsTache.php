@@ -11,10 +11,10 @@ if (isset($_GET['id'])) {
     $tache_id = $_GET['id'];
 
     // Instancier un objet Tache en passant l'identifiant de la tâche
-    $tache = new Tache($bdd,$tache_id,$libelle,$description,$date_echeance,$priorite,$difficulte,$etat);
+    $tache = new Tache($bdd, $tache_id, $libelle, $description, $date_echeance, $priorite, $difficulte, $etat);
 
     // Vérifier si la tâche existe
-    if(isset($tache)) {
+    if (isset($tache)) {
         // Préparation de la requête SQL
         $stmt = $bdd->prepare("SELECT * FROM taches WHERE id = :tache_id");
 
@@ -87,15 +87,19 @@ if (isset($_GET['id'])) {
 </head>
 <body>
 
+    
     <div class="task-details">
+        <div class="bouton-retour">
+            <a href="index.php">Retour</a>
+        </div>
         <h2>Détails de la tâche</h2>
         <p><strong>Libellé:</strong> <?php echo $result['libelle']; ?></p>
         <p><strong>Description:</strong> <?php echo $result['description']; ?></p>
         <p><strong>Date d'échéance:</strong> <?php echo $result['date_echeance']; ?></p>
         <p><strong>Priorité:</strong> <?php echo $result['priorite']; ?></p>
         <p><strong>Difficulté:</strong> <?php echo $result['difficulte']; ?></p>
-        <a href="" >Modifier la tâche</a>
-        <a href="" >Supprimer la tâche</a>
+        <a href="update.php?id=<?php echo $tache_id; ?>" >Modifier la tâche</a>
+        <a href="delete.php" >Supprimer la tâche</a>
     </div>
 
 </body>
