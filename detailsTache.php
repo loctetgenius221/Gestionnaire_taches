@@ -99,7 +99,7 @@ if (isset($_GET['id'])) {
         <p><strong>Priorité:</strong> <?php echo $result['priorite']; ?></p>
         <p><strong>Difficulté:</strong> <?php echo $result['difficulte']; ?></p>
         <a href="update.php?id=<?php echo $tache_id; ?>" >Modifier la tâche</a>
-        <a href="delete.php" >Supprimer la tâche</a>
+        <a href="delete.php?id=<?php echo $tache_id; ?>" >Supprimer la tâche</a>
     </div>
 
 </body>

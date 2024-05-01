@@ -102,19 +102,6 @@ body {
     border-radius: 16px;
 }
 
-.task-list {
-    background: #F4F2FF;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-/* ! ========================= */
-/* !À revoir après le code php */
-
-.task-list .task {
-    margin-bottom: 10px;
-}
 
 .task .details {
     display: flex;
@@ -125,29 +112,4 @@ body {
     margin-right: 10px;
 }
 
-.task .details .difficulty-bar {
-    width: 100px;
-    height: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-}
 
-.task .details .difficulty-bar .bar {
-    height: 100%;
-}
-
-.task .details .difficulty-bar .bar.low {
-    background-color: green;
-}
-
-.task .details .difficulty-bar .bar.medium {
-    background-color: yellow;
-}
-
-.task .details .difficulty-bar .bar.high {
-    background-color: red;
-}
-
-/* !À revoir après le code php */
-/* ! ========================= */

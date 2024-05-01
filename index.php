@@ -52,9 +52,22 @@ if(isset($_SESSION['user_id'])) {
         }
         .main-content .addbtn a {
             text-decoration: none;
-            color: white;
-            font-size: 2rem;
+            color: #2B1887;
+            font-size: .8rem;
             font-weight: bold;
+        }
+        .task-list {
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .task-list .task {
+            margin: 10px 0px;
+            background: #fff;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+               
         }
     </style>
 </head>
@@ -75,11 +88,7 @@ if(isset($_SESSION['user_id'])) {
         </div>
     </nav>
     <div class="main-content">
-        <div class="addbtn">
-            <span>
-                <a href="createTache.php">+</a>
-            </span>
-        </div>
+        
         <div class="column">
             <h2>À faire</h2>
             <div class="task-list">
@@ -95,6 +104,11 @@ if(isset($_SESSION['user_id'])) {
                     echo "</div>";
                 }
                 ?>
+                <div class="addbtn">
+                    <span>
+                        <a href="createTache.php">Ajouter une tache</a>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="column">
