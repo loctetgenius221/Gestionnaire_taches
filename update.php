@@ -59,40 +59,119 @@ if (isset($_GET['id'])) {
             }
         }
 ?>
-        <!-- Formulaire de modification de la tâche -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification de tâche</title>
+    <style>
+        /* Mise en page CSS */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .field label {
+            font-weight: bold;
+        }
+
+        .field input[type="text"],
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .field select {
+            width: calc(100% - 20px);
+        }
+
+        .field input[type="submit"] {
+            background-color: #2B1887;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .field input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
         <form action="" method="post">
-            <label for="libelle">Libellé :</label><br>
-            <input type="text" id="libelle" name="libelle" value="<?php echo $tache->getLibelle(); ?>" required><br>
-
-            <label for="description">Description :</label><br>
-            <textarea id="description" name="description" required><?php echo $tache->getDescription(); ?></textarea><br>
-
-            <label for="date_echeance">Date d'échéance :</label><br>
-            <input type="date" id="date_echeance" name="date_echeance" value="<?php echo $tache->getDate_echeance(); ?>" required><br>
-
-            <label for="priorite">Priorité :</label><br>
-            <select name="priorite" id="priorite" required>
-                <option value="Faible" <?php if ($tache->getPriorite() == 'Faible') echo 'selected'; ?>>Faible</option>
-                <option value="Moyenne" <?php if ($tache->getPriorite() == 'Moyenne') echo 'selected'; ?>>Moyenne</option>
-                <option value="Élevée" <?php if ($tache->getPriorite() == 'Élevée') echo 'selected'; ?>>Élevée</option>
-            </select><br>
-
-            <label for="difficulte">Difficulté :</label><br>
-            <select name="difficulte" id="difficulte" required>
-                <option value="Facile" <?php if ($tache->getDifficulte() == 'Facile') echo 'selected'; ?>>Facile</option>
-                <option value="Moyen" <?php if ($tache->getDifficulte() == 'Moyen') echo 'selected'; ?>>Moyen</option>
-                <option value="Difficile" <?php if ($tache->getDifficulte() == 'Difficile') echo 'selected'; ?>>Difficile</option>
-            </select><br>
-
-            <label for="etat">Etat :</label><br>
-            <select name="etat" id="etat" required>
-                <option value="À faire" <?php if ($tache->getEtat() == 'À faire') echo 'selected'; ?>>À faire</option>
-                <option value="En cours" <?php if ($tache->getEtat() == 'En cours') echo 'selected'; ?>>En cours</option>
-                <option value="Terminée" <?php if ($tache->getEtat() == 'Terminée') echo 'selected'; ?>>Terminée</option>
-            </select><br>
-
-            <input type="submit" name="submit" value="Modifier la tâche">
+            <h1>Modification de tâche</h1>
+            
+            <div class="field">
+                <label for="libelle">Libellé :</label><br>
+                <input type="text" id="libelle" name="libelle" value="<?php echo $tache->getLibelle(); ?>" required>
+            </div>
+            <div class="field">
+                <label for="description">Description :</label><br>
+                <textarea id="description" name="description" required><?php echo $tache->getDescription(); ?></textarea>
+            </div>
+            <div class="field">
+                <label for="date_echeance">Date d'échéance :</label><br>
+                <input type="date" id="date_echeance" name="date_echeance" value="<?php echo $tache->getDate_echeance(); ?>" required>
+            </div>
+            <div class="field">
+                <label for="priorite">Priorité :</label><br>
+                <select name="priorite" id="priorite" required>
+                    <option value="Faible" <?php if ($tache->getPriorite() == 'Faible') echo 'selected'; ?>>Faible</option>
+                    <option value="Moyenne" <?php if ($tache->getPriorite() == 'Moyenne') echo 'selected'; ?>>Moyenne</option>
+                    <option value="Élevée" <?php if ($tache->getPriorite() == 'Élevée') echo 'selected'; ?>>Élevée</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="difficulte">Difficulté :</label><br>
+                <select name="difficulte" id="difficulte" required>
+                    <option value="Facile" <?php if ($tache->getDifficulte() == 'Facile') echo 'selected'; ?>>Facile</option>
+                    <option value="Moyen" <?php if ($tache->getDifficulte() == 'Moyen') echo 'selected'; ?>>Moyen</option>
+                    <option value="Difficile" <?php if ($tache->getDifficulte() == 'Difficile') echo 'selected'; ?>>Difficile</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="etat">État :</label><br>
+                <select name="etat" id="etat" required>
+                    <option value="À faire" <?php if ($tache->getEtat() == 'À faire') echo 'selected'; ?>>À faire</option>
+                    <option value="En cours" <?php if ($tache->getEtat() == 'En cours') echo 'selected'; ?>>En cours</option>
+                    <option value="Terminée" <?php if ($tache->getEtat() == 'Terminée') echo 'selected'; ?>>Terminée</option>
+                </select>
+            </div>
+            
+            <div class="field">
+                <input type="submit" name="submit" value="Modifier la tâche">
+            </div>
         </form>
+    </div>
+
+</body>
+</html>
 <?php
     } else {
         echo "La tâche demandée n'existe pas.";
