@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 session_start();
 
 require_once 'inclusion/config.php';
@@ -46,7 +44,7 @@ if(isset($_SESSION['user_id'])) {
         }
         .main-content .addbtn span {
             padding: 8px 18px;
-            border-radius: 50%;
+            border-radius: 10px;
             background: #D5CCFF;
             display: flex;
             align-items: center;
@@ -93,7 +91,7 @@ if(isset($_SESSION['user_id'])) {
                     echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
                     echo "<span>Priorité: " . $tache['priorite'] . "</span>";
                     echo "<span>Difficulté: " . $tache['difficulte'] . "'</span>";
-                    echo "<a href='' class='view-btn'><i class='fa-regular fa-eye'></i></a>";
+                    echo "<a href='detailsTache.php?id=" . $tache['id'] . "' class='view-btn'><i class='fa-regular fa-eye'></i></a>";
                     echo "</div>";
                 }
                 ?>
@@ -111,7 +109,7 @@ if(isset($_SESSION['user_id'])) {
                     echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
                     echo "<span>Priorité: " . $tache['priorite'] . "</span>";
                     echo "<span>Difficulté: " . $tache['difficulte'] . "'</span>";
-                    echo "<a href='' class='view-btn'><i class='fa-regular fa-eye'></i></a>";
+                    echo "<a href='detailsTache.php?id=" . $tache['id'] . "' class='view-btn'><i class='fa-regular fa-eye'></i></a>";
                     echo "</div>";
                 }
                 ?>
@@ -129,7 +127,7 @@ if(isset($_SESSION['user_id'])) {
                     echo "<span>Date d'échéance: " . $tache['date_echeance'] . "</span>";
                     echo "<span>Priorité: " . $tache['priorite'] . "</span>";
                     echo "<span>Difficulté: " . $tache['difficulte'] . "'</span>";
-                    echo "<a href='' class='view-btn'><i class='fa-regular fa-eye'></i></a>";
+                    echo "<a href='detailsTache.php?id=" . $tache['id'] . "' class='view-btn'><i class='fa-regular fa-eye'></i></a>";
                     echo "</div>";
                 }
                 ?>
